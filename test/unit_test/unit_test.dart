@@ -1,10 +1,16 @@
 import 'package:khidma_app/screens.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
   group('Database Tests', () {
     late DatabaseProvider dbProvider;
     late Order testOrder;
+// Initialize sqflite for test
+  sqfliteFfiInit();
+
+  // Use sqflite_common_ffi's database factory for your tests
+  databaseFactory = databaseFactoryFfi;
 
     setUp(() async {
       dbProvider = DatabaseProvider();
@@ -78,15 +84,17 @@ void main() {
 group('User Authentication Tests', () {
   late DatabaseProvider dbProvider;
 
-  setUp(() {
+  setUp(() async {
     dbProvider = DatabaseProvider();
-    // Setup for authentication tests, like initializing mock data
+    // Initialize your test database here, including adding a test user
+    await dbProvider.loginUser('email', 'password'); // Mock method to add a user
   });
-    test('User Login Test', () async {
-      // Assuming you have methods to handle user login
-      final bool loginSuccess = await dbProvider.loginUser('email', 'password');
-      expect(loginSuccess, isTrue);
-    });
+
+  test('User Login Test', () async {
+    final bool loginSuccess = await dbProvider.loginUser('email', 'password');
+    expect(loginSuccess, isTrue);
+  });
+
 
    test('User Login Failure Test', () async {
     // Test login failure with incorrect credentials

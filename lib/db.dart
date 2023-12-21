@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names, depend_on_referenced_packages
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 import 'screens.dart';
 import 'package:path/path.dart';
@@ -203,15 +204,24 @@ class DatabaseProvider {
       whereArgs: [id],
     );
   }
-Future<int> insertOrder(Order order) async {
+Future<void> insertOrder(Order order) async {
+  try {
   final dbClient = await database;
-  int result = await dbClient.insert(
+   await dbClient.insert(
     TABLE_ORDERS, // Assuming TABLE_ORDERS is defined as your orders table name
     order.toMap(),
     conflictAlgorithm: ConflictAlgorithm.replace, // Optional: to handle the case where the same order is inserted twice
   );
-  return result;
+
+  } catch (e) {
+    if (kDebugMode) {
+      print('An error occurred while saving the order: $e');
+    }
+ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+    const SnackBar(content: Text('Failed to save order')),
+  );  }
 }
+
 
 Future<List<Order>> getOrders() async {
   final dbClient = await database;
@@ -277,13 +287,22 @@ Future<Order?> getOrderById(int id) async {
 }
 
 Future<List<Order>> getAllOrders() async {
-  final dbClient = await database;
-  List<Map> maps = await dbClient.query(TABLE_ORDERS);
+  try {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('orders');
 
-  return List.generate(maps.length, (i) {
-    return Order.fromMap(maps[i].cast<String, dynamic>());
-  });
+    return List.generate(maps.length, (i) {
+      return Order.fromMap(maps[i]);
+    });
+  } catch (e) {
+    if (kDebugMode) {
+      print('An error occurred while fetching orders: $e');
+    }
+    
+    return [];
+  }
 }
+
 
 // Method to get an order by its name
   Future<Order?> getOrderByName(String name) async {

@@ -32,36 +32,56 @@ import 'screens.dart';
 
 
 class OrdersPage extends StatelessWidget {
-  final Order order;
+  final Order? order;
 
   const OrdersPage({super.key, required this.order});
-
+ 
   @override
   Widget build(BuildContext context) {
-    return Card(
+     // Check if the order is null and display a message if so
+    if (order == null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Orders'),
+        ),
+        body: const Center(
+          child: Text('No orders yet', style: TextStyle(fontSize: 24)),
+        ),
+      );
+    }
+ else {    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Orders'),
+      ),
+ body:Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+    Card(
       margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       elevation: 5.0,
       child: Container(
         decoration: BoxDecoration(
-          color: _getStatusColor(order.status),
+          color: _getStatusColor(order!.status),
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: ListTile(
-          leading: _getStatusIcon(order.status),
-          title: Text(order.name, style: const TextStyle(color: Colors.white)),
+          leading: _getStatusIcon(order!.status),
+          title: Text(order!.name, style: const TextStyle(color: Colors.white)),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('التاريخ: ${order.date}', style: const TextStyle(color: Colors.white)),
-              Text('وصف الخدمة: ${order.description}', style: const TextStyle(color: Colors.white)),
-              Text('رقم العميل: ${order.customerPhone}', style: const TextStyle(color: Colors.white)),
+              Text('التاريخ: ${order!.date}', style: const TextStyle(color: Colors.white)),
+              Text('وصف الخدمة: ${order!.description}', style: const TextStyle(color: Colors.white)),
+              Text('رقم العميل: ${order!.customerPhone}', style: const TextStyle(color: Colors.white)),
             ],
           ),
           trailing: ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => OrderDetailScreen(order: order),
+                  builder: (context) =>  OrderDetailScreen(order: order),
                 ),
               );
             },
@@ -69,12 +89,17 @@ class OrdersPage extends StatelessWidget {
               backgroundColor: Colors.amber, // Background color
             ),
             child: const Text('عرض المزيد', style: TextStyle(color: Colors.black)),
-          ),
+        ),
+        ),
+        ),
+        ),
+        ],
         ),
       ),
     );
   }
 
+  }
   Color _getStatusColor(String status) {
     switch (status) {
       case 'completed':
@@ -119,8 +144,8 @@ class OrdersPage extends StatelessWidget {
       child: Icon(iconData, color: color, size: 32.0),
     );
   }
-}
 
+}
 class Order {
   final int id;
   final String name;

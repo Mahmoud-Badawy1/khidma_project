@@ -38,8 +38,12 @@ class MyApp extends StatelessWidget {
               const LoginPage(), // Ensure LoginPage is defined in your screens
           '/signup': (context) =>
               SignUpPage(), // Ensure SignUpPage is defined in your screens
-              '/forgotPassword': (context) => const ForgotPasswordScreen(),
+              // '/forgotPassword': (context) => const ForgotPasswordScreen(),
               '/discribtion':(context) => const DescriptionPage(),
+          '/orders': (context)  => 
+              const OrdersPage(order: null,),
+          '/homepage':(context) => const HomePage(),    
+           '/profile':(context) => const ProfilePage(),    
           // Define other routes as necessary
         },
       ),

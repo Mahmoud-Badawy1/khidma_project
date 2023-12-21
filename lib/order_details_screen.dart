@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens.dart';
 class OrderDetailScreen extends StatelessWidget {
-  final Order order;
+  final Order? order;
 
   const OrderDetailScreen({super.key, required this.order});
 
@@ -16,10 +16,10 @@ class OrderDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Name: ${order.name}', style: const TextStyle(fontSize: 20)),
-            Text('Date: ${order.date}', style: const TextStyle(fontSize: 20)),
-            Text('Description: ${order.description}', style: const TextStyle(fontSize: 20)),
-            Text('Status: ${order.status}', style: const TextStyle(fontSize: 20)),
+            Text('Name: ${order!.name}', style: const TextStyle(fontSize: 20)),
+            Text('Date: ${order!.date}', style: const TextStyle(fontSize: 20)),
+            Text('Description: ${order!.description}', style: const TextStyle(fontSize: 20)),
+            Text('Status: ${order!.status}', style: const TextStyle(fontSize: 20)),
             // Add more details as needed
           ],
         ),

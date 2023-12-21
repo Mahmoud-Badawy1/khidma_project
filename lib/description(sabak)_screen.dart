@@ -1,6 +1,8 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers, use_build_context_synchronously
 
 import 'dart:io';
+import 'package:flutter/foundation.dart';
+
 import 'screens.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,20 +12,19 @@ import 'package:map_launcher/map_launcher.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 
-var wat = TextEditingController;
 
-class DescriptionPage extends StatefulWidget {
-   const DescriptionPage({super.key});
+class DescriptionPagesab extends StatefulWidget {
+   const DescriptionPagesab({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _DescriptionPageState createState() => _DescriptionPageState();
+  _DescriptionPagesabState createState() => _DescriptionPagesabState();
 
 
 
 }
 
-class _DescriptionPageState extends State<DescriptionPage> {
+class _DescriptionPagesabState extends State<DescriptionPagesab> {
   XFile? _image;
   final _addressController = TextEditingController();
   final Location location = Location();
@@ -109,23 +110,14 @@ class _DescriptionPageState extends State<DescriptionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: Colors.orangeAccent,
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(243, 247, 143, 6),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.arrow_forward),
-              onPressed: () {
-                // print("Back to Home");
-              },
-            )
-          ],
         ),
         body: SingleChildScrollView(
           child: Column(
+          key:  _formKey,
             children: [
               const SizedBox(
                 height: 20,
@@ -158,7 +150,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
                           width: 250,
                           height: 50,
                           decoration: const BoxDecoration(),
-                          child:  const Center(child: Text("كهربائى",style: TextStyle(fontSize: 24, color: Color.fromARGB(255, 255, 255, 255))
+                          child:  const Center(child: Text("سباك",style: TextStyle(fontSize: 24, color: Color.fromARGB(255, 255, 255, 255))
                           ),
                           ),
                           ),
@@ -361,8 +353,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
                       color: Colors.yellow
                     ),
                     child: TextButton(
-                        onPressed: () {
-                        },
+                        onPressed: () => Navigator.pushNamed(context, '/homepage'),
                         child: const Text(
                           "الغاء الطلب ",
                         )),
@@ -383,9 +374,11 @@ class _DescriptionPageState extends State<DescriptionPage> {
    String userId = 'the_user_id'; // Replace with the actual user ID
   String? phoneNumber = await DatabaseProvider().getUserPhoneNumber(userId);
 
-      String serviceName = "كهربائى"; // The service name is static, as provided.
+      String serviceName = "سباك"; // The service name is static, as provided.
       String description = _descriptionController.text; // Description entered by the user in the TextFormField.
-
+  try {
+      // Create and save the order
+ 
       Order newOrder = Order(
         name: serviceName,
         date: DateFormat('dd/MM/yyyy').format(DateTime.now()), // Current date in dd/MM/yyyy format
@@ -396,10 +389,15 @@ class _DescriptionPageState extends State<DescriptionPage> {
 
       // Insert the new order into the database and then navigate to the OrdersPage.
       await DatabaseProvider().insertOrder(newOrder);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => OrdersPage(order:newOrder)),
-      );
+       // Feedback to the user (e.g., navigate to orders page or show success message)
+      Navigator.push(context, MaterialPageRoute(builder: (context) => OrdersPage(order: newOrder,)));
+    
+    } catch (e) {
+      // Handle errors and provide feedback
+      if (kDebugMode) {
+        print('Error creating order: $e');
+      }
+    }
     }
   },
   child: const Text(
@@ -433,9 +431,9 @@ class _DescriptionPageState extends State<DescriptionPage> {
         height: 88,
         decoration: const BoxDecoration(color: Colors.orange),
         child: TextButton(
-          onPressed: () {
-           
-          },
+         onPressed: () => Navigator.pushNamed(
+                        context, '/homepage'),
+
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
@@ -453,8 +451,8 @@ class _DescriptionPageState extends State<DescriptionPage> {
         height: 88,
         decoration: const BoxDecoration(color: Colors.orange),
         child: TextButton(
-          onPressed: () {
-          },
+          onPressed: () => Navigator.pushNamed(
+                        context, '/orders'),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
@@ -490,7 +488,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
         height: 88,
         decoration: const BoxDecoration(color: Colors.orange),
         child: TextButton(
-          onPressed: () {},
+          onPressed: () => Navigator.pushNamed(context, '/profile'),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
@@ -505,7 +503,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
 ),
 
         ),
-      ),
+     
     );
   }
 }
