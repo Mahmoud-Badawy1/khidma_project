@@ -42,6 +42,7 @@ class OrdersPage extends StatelessWidget {
     if (order == null) {
       return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.orangeAccent,
           title: const Text('Orders'),
         ),
         body: const Center(
@@ -96,6 +97,90 @@ class OrdersPage extends StatelessWidget {
         ],
         ),
       ),
+          bottomNavigationBar: SizedBox(
+              height: 88,
+      
+          child: Row(
+  mainAxisAlignment: MainAxisAlignment.end,
+  children: [
+    const SizedBox(width: 2),
+    Expanded(
+      child: Container(
+        width: 80,
+        height: 88,
+        decoration: const BoxDecoration(color: Colors.orange),
+        child: TextButton(
+         onPressed: () => Navigator.pushNamed(
+                        context, '/homepage'),
+
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Icon(Icons.add, color: Colors.yellow),
+              Text("اضافة طلب"),
+            ],
+          ),
+        ),
+      ),
+    ),
+    const SizedBox(width: 2),
+    Expanded(
+      child: Container(
+        width: 80,
+        height: 88,
+        decoration: const BoxDecoration(color: Colors.orange),
+        child: TextButton(
+          onPressed: () => Navigator.pushNamed(
+                        context, '/orders'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Icon(Icons.history, color: Colors.yellow),
+              Text("طلباتي السابقة", textDirection: TextDirection.rtl),
+            ],
+          ),
+        ),
+      ),
+    ),
+    const SizedBox(width: 2),
+    Expanded(
+      child: Container(
+        width: 80,
+        height: 88,
+        decoration: const BoxDecoration(color: Colors.orange),
+        child: TextButton(
+          onPressed: () {},
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Icon(Icons.question_answer, color: Colors.yellow),
+              Text("المجتمع :عرض الاسئلة الشائعة", textAlign: TextAlign.right),
+            ],
+          ),
+        ),
+      ),
+    ),
+    const SizedBox(width: 2),
+    Expanded(
+      child: Container(
+        width: 80,
+        height: 88,
+        decoration: const BoxDecoration(color: Colors.orange),
+        child: TextButton(
+          onPressed: () => Navigator.pushNamed(context, '/profile'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Icon(Icons.settings, color: Colors.yellow),
+              Text("الإعدادات"),
+            ],
+          ),
+        ),
+      ),
+    ),
+  ],
+),
+          )
     );
   }
 

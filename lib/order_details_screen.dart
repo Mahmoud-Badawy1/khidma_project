@@ -9,6 +9,7 @@ class OrderDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.orangeAccent,
         title: const Text('Order Details'),
       ),
       body: Padding(
