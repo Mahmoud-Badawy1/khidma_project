@@ -1,4 +1,4 @@
-# khidma_app
+# khidma-app
 
 A new Flutter project.
 
