@@ -32,18 +32,29 @@ class MyApp extends StatelessWidget {
           // Define your app theme here
           primarySwatch: Colors.blue,
         ),
-        home: SignUpPage(), // Your initial screen
+        home: const SignUpPage(), // Your initial screen
         routes: {
           '/login': (context) =>
               const LoginPage(), // Ensure LoginPage is defined in your screens
           '/signup': (context) =>
-              SignUpPage(), // Ensure SignUpPage is defined in your screens
-              // '/forgotPassword': (context) => const ForgotPasswordScreen(),
-              '/discribtion':(context) => const DescriptionPage(),
-          '/orders': (context)  => 
-              const OrdersPage(order: null,),
-          '/homepage':(context) => const HomePage(),    
-           '/profile':(context) => const ProfilePage(),    
+              const SignUpPage(), // Ensure SignUpPage is defined in your screens
+          // '/forgotPassword': (context) => const ForgotPasswordScreen(),
+          '/discribtionelc': (context) => const DescriptionPage(),
+          '/discribtionac': (context) => const DescriptionPageac(),
+          '/discribtioncam': (context) => const DescriptionPagecam(),
+          '/discribtionelev': (context) => const DescriptionPageelev(),
+          '/discribtionfillter': (context) => const DescriptionPagefil(),
+          '/discribtionmah': (context) => const DescriptionPagemah(),
+          '/discribtionnagar': (context) => const DescriptionPagenagar(),
+          '/discribtionnagash': (context) => const DescriptionPagenagash(),
+          '/discribtionsabak': (context) => const DescriptionPagesab(),
+          '/discribtionsteel': (context) => const DescriptionPagest(),
+          '/discribtiontv': (context) => const DescriptionPagetv(),
+          '/orders': (context) => const OrdersPage(
+                order: null,
+              ),
+          '/homepage': (context) => const HomePage(),
+          '/profile': (context) => const ProfilePage(),
           // Define other routes as necessary
         },
       ),

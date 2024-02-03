@@ -3,9 +3,16 @@ import 'screens.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class SignUpPage extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>(); // Signup form key
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
+  @override
+  // ignore: library_private_types_in_public_api
+  _SignUpPageState createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final _formKey = GlobalKey<FormState>(); // Signup form key
   // TextEditingControllers to retrieve the current value of TextFormFields
   final _userNameController = TextEditingController();
   final _phoneNumberController = TextEditingController();
@@ -14,8 +21,7 @@ class SignUpPage extends StatelessWidget {
 
   String _selectedUserType = 'normal'; // Default user type
 
-  SignUpPage({Key? key}) : super(key: key);
-
+ 
   void _handleSignUp(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       final String userName = _userNameController.text;
@@ -80,11 +86,18 @@ class SignUpPage extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(right: 10),
                         child: ElevatedButton(
-                          onPressed: () => _selectedUserType = 'normal',
+                          onPressed: () {
+                            setState(() {
+                              _selectedUserType = 'normal';
+                            });
+                          },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
-                            backgroundColor:
-                                const Color(0xFFFF9800), // Orange Color
+                            backgroundColor: _selectedUserType == 'normal'
+                                ? const Color(
+                                    0xFFEE8800) // Lighter Orange Color
+                                : const Color(
+                                    0xFFFF9800), // Default Orange Color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
                             ),

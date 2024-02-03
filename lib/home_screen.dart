@@ -1,143 +1,613 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// ignore_for_file: library_private_types_in_public_api
 
-class HomePage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'screens.dart';
+
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
-  
+  @override
+  _HomePageState createState() => _HomePageState();
+}
 
-
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    // Show welcome dialog
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Welcome to Khidma App'),
-           
-            actions: <Widget>[
-              TextButton(
-                child: const Text('Close'),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ],
-          );
-        },
-      );
-    });
-
-    final List<Map<String, dynamic>> products = [
-      {
-        'id': 1,
-        'name': 'Tropical Bouquet',
-        'price': 29.99,
-        'image': 'https://images.unsplash.com/photo-1572454591674-2739f30d8c40',
-        'description':
-            'A beautiful arrangement of tropical flowers to brighten any room.'
-      },
-      {
-        'id': 2,
-        'name': 'Rose Delight',
-        'price': 19.99,
-        'image': 'https://images.unsplash.com/photo-1567696153798-9111f9cd3d0d',
-        'description':
-            'Classic red roses with delicate foliage for your loved one.'
-      },
-      {
-        'id': 3,
-        'name': 'Spring Medley',
-        'price': 24.99,
-        'image': 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd',
-        'description':
-            'A colorful mix of seasonal flowers to represent the spring spirit.'
-      },
-      {
-        'id': 4,
-        'name': 'Orchid Obsession',
-        'price': 34.99,
-        'image': 'https://images.unsplash.com/photo-1567418938902-aa650a3eb346',
-        'description':
-            'Elegant orchids perfect for an office or home environment.'
-      },
-      {
-        'id': 5,
-        'name': 'Sunflower Sunshine',
-        'price': 15.99,
-        'image': 'https://images.unsplash.com/photo-1596438459194-f275f413d6ff',
-        'description':
-            'Bright sunflowers to bring joy and sunshine into your space.'
-      },
-      {
-        'id': 6,
-        'name': 'Lavender Bliss',
-        'price': 18.99,
-        'image':
-            'https://images.unsplash.com/photo-1603178455924-ef33372953bb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGZsb3dlciUyMGJvdXF1ZXR8ZW58MHx8MHx8fDA%3D',
-        'description':
-            'Soothing lavender bunch to calm and add a fragrance to any room.'
-      },
-    ];
-
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: Consumer(
-        builder: (context, orderProvider, child) {
-          // Here you can safely use orderProvider to interact with the orders data
-          return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.6,
-            ),
-            itemCount: products.length,
-            itemBuilder: (context, index) {
-              final product = products[index];
-              return Card(
-                clipBehavior: Clip.antiAlias, // Add this line
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    AspectRatio(
-                      aspectRatio: 1, // This gives a square shape to your image
-                      child: Image.network(
-                        product['image'],
-                        fit: BoxFit.cover,
+      appBar: AppBar(
+        // Assuming you have an image asset for the app bar title
+        title: Image.asset('assets/images/appbar.png', fit: BoxFit.cover),
+        leading: Image.asset('assets/images/logo.png'),
+        backgroundColor:
+            Colors.orange, // Match the background color in the screenshot
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              // mainAxisAlignment : MainAxisAlignment.spaceAround,
+              width: double.infinity,
+              height: 113,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.orange // Set your desired background color here
                       ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DescriptionPage(),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            product['name'],
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Text('\$${product['price'].toStringAsFixed(2)}',
-                              style: const TextStyle(color: Colors.grey)),
-                        ],
-                      ),
-                    ),
-                    const Spacer(), // Use a Spacer to push the button to the end of the card
-                    ButtonBar(
-                      alignment: MainAxisAlignment.start,
-                      children: [
-                       TextButton(
-                          onPressed: () => Navigator.pushNamed(
-                        context, '/discribtion'),
-
-                          child: const Text('Buy Now'),
+                  );
+                },
+                child: Stack(
+                  children: [
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          'كهربائي',
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.bold),
                         ),
-                      ],
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset("assets/images/electric.png"),
+                      ),
                     ),
                   ],
                 ),
-              );
-            },
-          );
-        },
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              width: double.infinity,
+              height: 113,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.orange // Set your desired background color here
+                      ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DescriptionPageac(),
+                    ),
+                  );
+                },
+                child: Stack(
+                  children: [
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          'تكيف وتبريد',
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset(
+                            "assets/images/electric.png"), //Replace it with the right image
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              width: double.infinity,
+              height: 113,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.orange // Set your desired background color here
+                      ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DescriptionPagecam(),
+                    ),
+                  );
+                },
+                child: Stack(
+                  children: [
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          'تصليح كاميرات',
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset(
+                            "assets/images/zogag.png"), //Replace it with the right image
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              width: double.infinity,
+              height: 113,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.orange // Set your desired background color here
+                      ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DescriptionPageelev(),
+                    ),
+                  );
+                },
+                child: Stack(
+                  children: [
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          'تصليح مصاعد',
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset(
+                            "assets/images/electric.png"), //Replace it with the right image
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              width: double.infinity,
+              height: 113,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.orange // Set your desired background color here
+                      ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DescriptionPagefil(),
+                    ),
+                  );
+                },
+                child: Stack(
+                  children: [
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          'فلاتر',
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset("assets/images/tanzef.png"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              width: double.infinity,
+              height: 113,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.orange // Set desired background color here
+                      ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DescriptionPagemah(),
+                    ),
+                  );
+                },
+                child: Stack(
+                  children: [
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          'محارة',
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset(
+                            "assets/images/zogag.png"), //Replace it with the right image
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              width: double.infinity,
+              height: 113,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.orange // Set your desired background color here
+                      ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DescriptionPagenagar(),
+                    ),
+                  );
+                },
+                child: Stack(
+                  children: [
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          'نجار',
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset("assets/images/nagar.png"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              width: double.infinity,
+              height: 113,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.orange // Set your desired background color here
+                      ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DescriptionPagenagash(),
+                    ),
+                  );
+                },
+                child: Stack(
+                  children: [
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          'نقاش',
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset(
+                            "assets/images/electric.png"), //Replace it with the right image
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              width: double.infinity,
+              height: 113,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.orange // Set your desired background color here
+                      ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DescriptionPagesab(),
+                    ),
+                  );
+                },
+                child: Stack(
+                  children: [
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          'سباك',
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset("assets/images/sabak.png"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              width: double.infinity,
+              height: 113,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.orange // Set your desired background color here
+                      ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DescriptionPagest(),
+                    ),
+                  );
+                },
+                child: Stack(
+                  children: [
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          'حداد',
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset("assets/images/hadad.png"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              width: double.infinity,
+              height: 113,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.orange // Set your desired background color here
+                      ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DescriptionPagetv(),
+                    ),
+                  );
+                },
+                child: Stack(
+                  children: [
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          'تصليح دش وتليفيزيون',
+                          style: TextStyle(
+                              fontSize: 26, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset(
+                            "assets/images/electric.png"), //Replace it with the right image
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 88,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Expanded(
+              child: Container(
+                foregroundDecoration: BoxDecoration(border: Border.all(color: Colors.white)),
+                width: 80,
+                height: 88,
+                decoration: const BoxDecoration(color: Colors.orange),
+                child: TextButton(
+                  onPressed: () => Navigator.pushNamed(context, '/homepage'),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.add, color: Colors.yellow),
+                      Text("اضافة طلب"),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                foregroundDecoration: BoxDecoration(border: Border.all(color: Colors.white)),
+                width: 80,
+                height: 88,
+                decoration: const BoxDecoration(color: Colors.orange),
+                child: TextButton(
+                  onPressed: () => Navigator.pushNamed(context, '/orders'),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.history, color: Colors.yellow),
+                      Text("طلباتي السابقة", textDirection: TextDirection.rtl),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                foregroundDecoration: BoxDecoration(border: Border.all(color: Colors.white)),
+                width: 80,
+                height: 88,
+                decoration: const BoxDecoration(color: Colors.orange),
+                child: TextButton(
+                  onPressed: () {},
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.question_answer, color: Colors.yellow),
+                      Text("المجتمع :عرض الاسئلة الشائعة",
+                          textAlign: TextAlign.right),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+              foregroundDecoration: BoxDecoration(border: Border.all(color: Colors.white)),
+                width: 80,
+                height: 88,
+                decoration: const BoxDecoration(color: Colors.orange),
+                child: TextButton(
+                  onPressed: () => Navigator.pushNamed(context, '/profile'),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.settings, color: Colors.yellow),
+                      Text("الإعدادات"),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,0 +1,12 @@
+export 'description(elec)_screen.dart';
+export 'description(ac)_screen.dart';
+export 'description(tv)_screen.dart';
+export 'description(nagar)_screen.dart';
+export 'description(sabak)_screen.dart';
+export 'description(steel)_screen.dart';
+export 'description(camera)_screen.dart';
+export 'description(nagash)_screen.dart';
+export 'description(fillter)_screen.dart';
+export 'description(mahhara)_screen.dart';
+export 'description(elevators)_screen.dart';
+export 'package:khidma_app/screens.dart';

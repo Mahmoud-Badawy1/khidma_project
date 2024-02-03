@@ -10,7 +10,7 @@ class OrderDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orangeAccent,
-        title: const Text('Order Details'),
+         title: Image.asset('assets/images/appbar.png', fit: BoxFit.cover),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

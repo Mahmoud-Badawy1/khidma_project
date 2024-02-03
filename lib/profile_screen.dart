@@ -8,24 +8,24 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orangeAccent,
-        title: const Text('My Account'),
+        title: Image.asset('assets/images/appbar.png', fit: BoxFit.cover),
       ),
-      body: SingleChildScrollView( 
-        child: Column(
+      body: SingleChildScrollView(
+         child: Column(
         children: [
           const SizedBox(height: 40),
-          const CircleAvatar(
+           const CircleAvatar(
             radius: 60,
             backgroundImage: NetworkImage(
                 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5'),
           ),
+          
           const SizedBox(height: 20),
           const Text(
             'Jane Doe',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 40),
-          buildProfileOption('Bookmarks', Icons.bookmark),
           buildProfileOption('طلباتي السابقة', Icons.history),
           buildProfileOption('الملف الشخصي', Icons.person),
           buildProfileOption('تغيير كلمة المرور', Icons.lock),
@@ -52,7 +52,6 @@ class ProfilePage extends StatelessWidget {
           child: Row(
   mainAxisAlignment: MainAxisAlignment.end,
   children: [
-    const SizedBox(width: 2),
     Expanded(
       child: Container(
         width: 80,
@@ -72,7 +71,6 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
     ),
-    const SizedBox(width: 2),
     Expanded(
       child: Container(
         width: 80,
@@ -91,7 +89,6 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
     ),
-    const SizedBox(width: 2),
     Expanded(
       child: Container(
         width: 80,
@@ -109,7 +106,6 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
     ),
-    const SizedBox(width: 2),
     Expanded(
       child: Container(
         width: 80,

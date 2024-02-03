@@ -30,161 +30,169 @@ import 'screens.dart';
 //   }
 // }
 
-
 class OrdersPage extends StatelessWidget {
   final Order? order;
 
   const OrdersPage({super.key, required this.order});
- 
+
   @override
   Widget build(BuildContext context) {
-     // Check if the order is null and display a message if so
+    // Check if the order is null and display a message if so
     if (order == null) {
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.orangeAccent,
-          title: const Text('Orders'),
+          title: Image.asset('assets/images/appbar.png', fit: BoxFit.cover),
         ),
         body: const Center(
           child: Text('No orders yet', style: TextStyle(fontSize: 24)),
         ),
       );
-    }
- else {    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Orders'),
-      ),
- body:Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-    Card(
-      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-      elevation: 5.0,
-      child: Container(
-        decoration: BoxDecoration(
-          color: _getStatusColor(order!.status),
-          borderRadius: BorderRadius.circular(5.0),
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Orders'),
         ),
-        child: ListTile(
-          leading: _getStatusIcon(order!.status),
-          title: Text(order!.name, style: const TextStyle(color: Colors.white)),
-          subtitle: Column(
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('التاريخ: ${order!.date}', style: const TextStyle(color: Colors.white)),
-              Text('وصف الخدمة: ${order!.description}', style: const TextStyle(color: Colors.white)),
-              Text('رقم العميل: ${order!.customerPhone}', style: const TextStyle(color: Colors.white)),
-            ],
-          ),
-          trailing: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) =>  OrderDetailScreen(order: order),
+              Card(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                elevation: 5.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: _getStatusColor(order!.status),
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  child: ListTile(
+                    leading: _getStatusIcon(order!.status),
+                    title: Text(order!.name,
+                        style: const TextStyle(color: Colors.white)),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text('التاريخ: ${order!.date}',
+                            style: const TextStyle(color: Colors.white)),
+                        Text('وصف الخدمة: ${order!.description}',
+                            style: const TextStyle(color: Colors.white)),
+                        Text('رقم العميل: ${order!.customerPhone}',
+                            style: const TextStyle(color: Colors.white)),
+                      ],
+                    ),
+                    trailing: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                OrderDetailScreen(order: order),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.amber, // Background color
+                      ),
+                      child: const Text('عرض المزيد',
+                          style: TextStyle(color: Colors.black)),
+                    ),
+                  ),
                 ),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.amber, // Background color
-            ),
-            child: const Text('عرض المزيد', style: TextStyle(color: Colors.black)),
+              ),
+            ],
+          ),
         ),
-        ),
-        ),
-        ),
-        ],
-        ),
-      ),
-          bottomNavigationBar: SizedBox(
-              height: 88,
-      
+        bottomNavigationBar: SizedBox(
+          height: 88,
           child: Row(
-  mainAxisAlignment: MainAxisAlignment.end,
-  children: [
-    const SizedBox(width: 2),
-    Expanded(
-      child: Container(
-        width: 80,
-        height: 88,
-        decoration: const BoxDecoration(color: Colors.orange),
-        child: TextButton(
-         onPressed: () => Navigator.pushNamed(
-                        context, '/homepage'),
-
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.add, color: Colors.yellow),
-              Text("اضافة طلب"),
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                child: Container(
+                  foregroundDecoration:
+                      BoxDecoration(border: Border.all(color: Colors.white)),
+                  width: 80,
+                  height: 88,
+                  decoration: const BoxDecoration(color: Colors.orange),
+                  child: TextButton(
+                    onPressed: () => Navigator.pushNamed(context, '/homepage'),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.add, color: Colors.yellow),
+                        Text("اضافة طلب"),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  foregroundDecoration:
+                      BoxDecoration(border: Border.all(color: Colors.white)),
+                  width: 80,
+                  height: 88,
+                  decoration: const BoxDecoration(color: Colors.orange),
+                  child: TextButton(
+                    onPressed: () => Navigator.pushNamed(context, '/orders'),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.history, color: Colors.yellow),
+                        Text("طلباتي السابقة",
+                            textDirection: TextDirection.rtl),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  foregroundDecoration:
+                      BoxDecoration(border: Border.all(color: Colors.white)),
+                  width: 80,
+                  height: 88,
+                  decoration: const BoxDecoration(color: Colors.orange),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.question_answer, color: Colors.yellow),
+                        Text("المجتمع :عرض الاسئلة الشائعة",
+                            textAlign: TextAlign.right),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  foregroundDecoration:
+                      BoxDecoration(border: Border.all(color: Colors.white)),
+                  width: 80,
+                  height: 88,
+                  decoration: const BoxDecoration(color: Colors.orange),
+                  child: TextButton(
+                    onPressed: () => Navigator.pushNamed(context, '/profile'),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.settings, color: Colors.yellow),
+                        Text("الإعدادات"),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
-      ),
-    ),
-    const SizedBox(width: 2),
-    Expanded(
-      child: Container(
-        width: 80,
-        height: 88,
-        decoration: const BoxDecoration(color: Colors.orange),
-        child: TextButton(
-          onPressed: () => Navigator.pushNamed(
-                        context, '/orders'),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.history, color: Colors.yellow),
-              Text("طلباتي السابقة", textDirection: TextDirection.rtl),
-            ],
-          ),
-        ),
-      ),
-    ),
-    const SizedBox(width: 2),
-    Expanded(
-      child: Container(
-        width: 80,
-        height: 88,
-        decoration: const BoxDecoration(color: Colors.orange),
-        child: TextButton(
-          onPressed: () {},
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.question_answer, color: Colors.yellow),
-              Text("المجتمع :عرض الاسئلة الشائعة", textAlign: TextAlign.right),
-            ],
-          ),
-        ),
-      ),
-    ),
-    const SizedBox(width: 2),
-    Expanded(
-      child: Container(
-        width: 80,
-        height: 88,
-        decoration: const BoxDecoration(color: Colors.orange),
-        child: TextButton(
-          onPressed: () => Navigator.pushNamed(context, '/profile'),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.settings, color: Colors.yellow),
-              Text("الإعدادات"),
-            ],
-          ),
-        ),
-      ),
-    ),
-  ],
-),
-          )
-    );
+      );
+    }
   }
 
-  }
   Color _getStatusColor(String status) {
     switch (status) {
       case 'completed':
@@ -229,12 +237,13 @@ class OrdersPage extends StatelessWidget {
       child: Icon(iconData, color: color, size: 32.0),
     );
   }
-
 }
+
 class Order {
   final int id;
   final String name;
-  final String date; // Assuming date is a string. You could also use DateTime and format it accordingly.
+  final String
+      date; // Assuming date is a string. You could also use DateTime and format it accordingly.
   final String description;
   final String? customerPhone;
   final String status; // 'completed', 'incomplete', 'cancelled'
@@ -265,6 +274,7 @@ class Order {
       status: status ?? this.status,
     );
   }
+
   // Convert a Order object into a Map object
   Map<String, dynamic> toMap() {
     return {
@@ -289,4 +299,3 @@ class Order {
     );
   }
 }
-
