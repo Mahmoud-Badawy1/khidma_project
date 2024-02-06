@@ -111,9 +111,9 @@ class _DescriptionPageState extends State<DescriptionPage> {
         backgroundColor: const Color.fromARGB(243, 247, 143, 6),
       ),
       body: SingleChildScrollView(
-        child: Column(
+        child: Form(
           key: _formKey,
-          children: [
+          child: Column(children: [
             const SizedBox(
               height: 20,
             ),
@@ -388,7 +388,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
                               date: DateFormat('dd/MM/yyyy').format(DateTime
                                   .now()), // Current date in dd/MM/yyyy format
                               description: description,
-                              customerPhone: phoneNumber,
+                              customerPhone: phoneNumber = "20",
                               status: 'incomplete',
                               id: 1, // Set status as incomplete
                             );
@@ -396,6 +396,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
                             // Insert the new order into the database and then navigate to the OrdersPage.
                             await DatabaseProvider().insertOrder(newOrder);
                             // Feedback to the user (e.g., navigate to orders page or show success message)
+                            // ignore: use_build_context_synchronously
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -422,7 +423,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
             const SizedBox(
               height: 20,
             ),
-          ],
+          ],)
         ),
       ),
       bottomNavigationBar: SizedBox(

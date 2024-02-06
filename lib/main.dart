@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           // Define your app theme here
           primarySwatch: Colors.blue,
         ),
-        home: const SignUpPage(), // Your initial screen
+        home: const FirstPage(), // Your initial screen
         routes: {
           '/login': (context) =>
               const LoginPage(), // Ensure LoginPage is defined in your screens
@@ -55,6 +55,8 @@ class MyApp extends StatelessWidget {
               ),
           '/homepage': (context) => const HomePage(),
           '/profile': (context) => const ProfilePage(),
+          '/orderdetails':(context) => const OrderDetailScreen(order: null),
+          '/firstpage':(context) => const FirstPage(),
           // Define other routes as necessary
         },
       ),

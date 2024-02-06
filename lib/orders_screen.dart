@@ -1,35 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens.dart';
 
-// class OrderWidget extends StatelessWidget {
-//   final Order order;
-
-//   const OrderWidget({super.key, required this.order});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Card(
-//       color: order.status == 'completed' ? const Color.fromARGB(255, 33, 62, 110) :
-//              order.status == 'incomplete' ? Colors.green :
-//              Colors.red,
-//       child: ListTile(
-//         title: Text(order.name),
-//         subtitle: Text('Date: ${order.date}\nDescription: ${order.description}'),
-//         trailing: IconButton(
-//           icon: const Icon(Icons.arrow_forward),
-//           onPressed: () {
-//             Navigator.of(context).push(
-//               MaterialPageRoute(
-//                 builder: (context) => OrderDetailScreen(order: order),
-//               ),
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class OrdersPage extends StatelessWidget {
   final Order? order;
 
@@ -208,20 +179,20 @@ class OrdersPage extends StatelessWidget {
 
   Widget _getStatusIcon(String status) {
     IconData iconData;
-    Color color;
+    Color? color;
 
     switch (status) {
       case 'completed':
         iconData = Icons.check_circle_outline;
-        color = Colors.white;
+        color = Colors.blue[200];
         break;
       case 'incomplete':
         iconData = Icons.access_time_outlined;
-        color = Colors.white;
+        color = Colors.green;
         break;
       case 'cancelled':
         iconData = Icons.cancel_outlined;
-        color = Colors.white;
+        color = const Color.fromARGB(255, 193, 11, 11);
         break;
       default:
         iconData = Icons.help_outline;
@@ -231,7 +202,7 @@ class OrdersPage extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.2), // Lighter shade of the icon
+        color: color?.withOpacity(0.2), // Lighter shade of the icon
         shape: BoxShape.circle,
       ),
       child: Icon(iconData, color: color, size: 32.0),
@@ -299,3 +270,33 @@ class Order {
     );
   }
 }
+
+
+// class OrderWidget extends StatelessWidget {
+//   final Order order;
+
+//   const OrderWidget({super.key, required this.order});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Card(
+//       color: order.status == 'completed' ? const Color.fromARGB(255, 33, 62, 110) :
+//              order.status == 'incomplete' ? Colors.green :
+//              Colors.red,
+//       child: ListTile(
+//         title: Text(order.name),
+//         subtitle: Text('Date: ${order.date}\nDescription: ${order.description}'),
+//         trailing: IconButton(
+//           icon: const Icon(Icons.arrow_forward),
+//           onPressed: () {
+//             Navigator.of(context).push(
+//               MaterialPageRoute(
+//                 builder: (context) => OrderDetailScreen(order: order),
+//               ),
+//             );
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }

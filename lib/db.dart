@@ -11,7 +11,7 @@ class DatabaseProvider {
   static const String COLUMN_USER_ID = 'id';
   static const String COLUMN_USER_USER_NAME = 'user_name';
   static const String COLUMN_USER_PHONE_NUMBER = 'phone_number';
-  static const String COLUMN_USER_EMAIL = 'email';
+  static const dynamic COLUMN_USER_EMAIL = 'email';
   static const String COLUMN_USER_PASSWORD = 'password';
   static const String COLUMN_USER_TYPE =
       'user_type'; // Column to distinguish user types
@@ -20,7 +20,7 @@ class DatabaseProvider {
   static const String TABLE_WORKERS = 'workers';
   static const String COLUMN_WORKER_ID = 'id';
   static const String COLUMN_WORKER_NAME = 'name';
-  static const String COLUMN_WORKER_EMAIL = 'email';
+  static const dynamic COLUMN_WORKER_EMAIL = 'email';
   static const String COLUMN_WORKER_PHONE_NUMBER = 'phone_number';
 
   static const String TABLE_ORDERS = 'orders';
@@ -36,6 +36,7 @@ class DatabaseProvider {
   static const int _databaseVersion = 1;
 
   Database? _database;
+
 
   Future<Database> get database async {
     if (_database != null) return _database!;
@@ -92,7 +93,7 @@ class DatabaseProvider {
   }
 
   Future<Map<String, dynamic>?> getUserByEmailAndPassword(
-      String email, String password) async {
+      dynamic email, String password) async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       TABLE_USERS,
@@ -105,7 +106,7 @@ class DatabaseProvider {
     return null;
   }
   // Method to handle user login
-  Future<bool> loginUser(String email, String password) async {
+  Future<bool> loginUser(dynamic email, String password) async {
     final dbClient = await database;
     List<Map> result = await dbClient.query(
       'users',
@@ -115,7 +116,7 @@ class DatabaseProvider {
 
     return result.isNotEmpty;
   }
-   Future<bool> registerUser(String email, String password) async {
+   Future<bool> registerUser(dynamic email, String password) async {
     final dbClient = await database;
     try {
       // Inserting a new user into the users table
@@ -150,6 +151,24 @@ class DatabaseProvider {
     }
     return null; // Return null if the user is not found
   }
+ Future<String?> getUserName(String userId) async {
+    final dbProvider = DatabaseProvider(); // Create an instance
+    final dbClient = await dbProvider.database; // Access database through the instance
+
+    List<Map> result = await dbClient.query(
+      DatabaseProvider.TABLE_USERS,
+      columns: ['user_name'],
+      where: 'id = ?',
+      whereArgs: [userId],
+    );
+
+    if (result.isNotEmpty) {
+      return result.first['user_name'] as String;
+    }
+    return null;
+  }
+  
+  
  Future<void> updateUser(int id, Map<String, dynamic> updatedData) async {
     final db = await database;
     await db.update(
