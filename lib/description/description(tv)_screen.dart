@@ -1,4 +1,6 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers, use_build_context_synchronously
+
+
+// ignore_for_file: file_names, no_leading_underscores_for_local_identifiers
 
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -111,319 +113,323 @@ class _DescriptionPagetvState extends State<DescriptionPagetv> {
         backgroundColor: const Color.fromARGB(243, 247, 143, 6),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          key: _formKey,
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.orange,
-                    border: Border.all(width: 2, color: Colors.orange
-                        // BorderRadius.circular(50.0),
-                        ),
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      //ماذا تحتاج
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+        child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.orange,
+                        border: Border.all(width: 2, color: Colors.orange
+                            // BorderRadius.circular(50.0),
+                            ),
+                        borderRadius: BorderRadius.circular(10.0)),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const SizedBox(
                             height: 20,
                           ),
-                          Container(
-                            width: 250,
-                            height: 50,
-                            decoration: const BoxDecoration(),
-                            child: const Center(
-                              child: Text("تصليح دش وتليقزيون",
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      color:
-                                          Color.fromARGB(255, 255, 255, 255))),
-                            ),
-                          ),
-                          const Text(
-                            " : ماذا تحتاج ",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      //متوسط السعر
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: 70,
-                            height: 50,
-                            decoration:
-                                const BoxDecoration(color: Colors.amber),
-                            child: TextFormField(
-                              controller: _frompricecontroller,
-                              keyboardType: TextInputType.number,
-                              textAlign: TextAlign.right,
-                              decoration: const InputDecoration(),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          const Text(
-                            "الي",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.right,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: 70,
-                            height: 50,
-                            decoration:
-                                const BoxDecoration(color: Colors.amber),
-                            child: TextFormField(
-                              controller: _topricecontroller,
-                              keyboardType: TextInputType.number,
-                              textAlign: TextAlign.right,
-                              decoration: const InputDecoration(),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          const Text(
-                            "متوسط السعر من",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.right,
-                          ),
-                          const SizedBox(
-                            width: 5.0,
-                          ),
-                        ], //Row children
-                      ),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                      //وصف الخدمة
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          const Text(
-                            "وصف الخدمة",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              fontSize: 20,
-                            ),
-                            textAlign: TextAlign.right,
-                            textDirection: TextDirection.rtl,
-                          ),
-                          Container(
-                            width: 300,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                              width: 1.0,
-                            )),
-                            child: TextFormField(
-                              controller: _descriptionController,
-                              textAlign: TextAlign.right,
-                              keyboardType: TextInputType.text,
-                              decoration: const InputDecoration(),
-                            ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          const Text(
-                            "تصوير المشكلة",
-                            textAlign: TextAlign.center,
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.camera_alt),
-                            onPressed: _takePicture,
-                          ),
-                          const SizedBox(width: 5),
-                          if (_image != null)
-                            SizedBox(
-                              height: 20, // Adjust the size as needed
-                              width: 100, // Adjust the size as needed
-                              child: Image.file(File(_image!.path)),
-                            ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          const Text(
-                            "العنوان",
-                            textAlign: TextAlign.end,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
+                          //ماذا تحتاج
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              IconButton(
-                                onPressed: _getUserLocation,
-                                icon: const Icon(
-                                  Icons.location_city_outlined,
-                                  color: Color.fromARGB(255, 193, 244, 54),
-                                  size: 30.0,
-                                ),
+                              const SizedBox(
+                                height: 20,
                               ),
                               Container(
-                                width: 100,
-                                height: 35,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.greenAccent),
-                                child: const Text(
-                                  "تحديد الموقع ",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(),
+                                width: 200,
+                                height: 60,
+                                decoration: const BoxDecoration(),
+                                child: const Center(
+                                  child: Text('تصليح دش وتليفيزيون',
+                                      style: TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255))),
                                 ),
+                              ),
+                              const Text(
+                                " : ماذا تحتاج ",
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
                           const SizedBox(
                             height: 20,
                           ),
-                          SizedBox(
-                            width: 300,
-                            child: TextFormField(
-                              controller: _locatincontroller,
-                              textAlign: TextAlign.right,
-                              keyboardType: TextInputType.text,
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    width: 1,
-                                  )),
-                                  hintText: "اضغط هنا لكتابة العنوان يدوياً",
-                                  hintTextDirection: TextDirection.rtl,
-                                  helperStyle: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            ),
+                          //متوسط السعر
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                width: 70,
+                                height: 50,
+                                decoration:
+                                    const BoxDecoration(color: Colors.amber),
+                                child: TextFormField(
+                                  controller: _frompricecontroller,
+                                  keyboardType: TextInputType.number,
+                                  textAlign: TextAlign.right,
+                                  decoration: const InputDecoration(),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Text(
+                                "الي",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.right,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                width: 70,
+                                height: 50,
+                                decoration:
+                                    const BoxDecoration(color: Colors.amber),
+                                child: TextFormField(
+                                  controller: _topricecontroller,
+                                  keyboardType: TextInputType.number,
+                                  textAlign: TextAlign.right,
+                                  decoration: const InputDecoration(),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Text(
+                                "متوسط السعر من",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.right,
+                              ),
+                              const SizedBox(
+                                width: 5.0,
+                              ),
+                            ], //Row children
                           ),
                           const SizedBox(
-                            height: 50,
-                          )
-                        ],
-                      ),
-                    ] //Column children
-                    ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+                            height: 5.0,
+                          ),
+                          //وصف الخدمة
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              const Text(
+                                "وصف الخدمة",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 20,
+                                ),
+                                textAlign: TextAlign.right,
+                                textDirection: TextDirection.rtl,
+                              ),
+                              Container(
+                                width: 300,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                  width: 1.0,
+                                )),
+                                child: TextFormField(
+                                  controller: _descriptionController,
+                                  textAlign: TextAlign.right,
+                                  keyboardType: TextInputType.text,
+                                  decoration: const InputDecoration(),
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Text(
+                                "تصوير المشكلة",
+                                textAlign: TextAlign.center,
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.camera_alt),
+                                onPressed: _takePicture,
+                              ),
+                              const SizedBox(width: 5),
+                              if (_image != null)
+                                SizedBox(
+                                  height: 20, // Adjust the size as needed
+                                  width: 100, // Adjust the size as needed
+                                  child: Image.file(File(_image!.path)),
+                                ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              const Text(
+                                "العنوان",
+                                textAlign: TextAlign.end,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                    onPressed: _getUserLocation,
+                                    icon: const Icon(
+                                      Icons.location_city_outlined,
+                                      color: Color.fromARGB(255, 193, 244, 54),
+                                      size: 30.0,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        color: Colors.greenAccent),
+                                    child: const Text(
+                                      "تحديد الموقع ",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              SizedBox(
+                                width: 300,
+                                child: TextFormField(
+                                  controller: _locatincontroller,
+                                  textAlign: TextAlign.right,
+                                  keyboardType: TextInputType.text,
+                                  decoration: const InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                        width: 1,
+                                      )),
+                                      hintText:
+                                          "اضغط هنا لكتابة العنوان يدوياً",
+                                      hintTextDirection: TextDirection.rtl,
+                                      helperStyle: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 50,
+                              )
+                            ],
+                          ),
+                        ] //Column children
+                        ),
+                  ),
+                ),
                 const SizedBox(
-                  width: 10,
+                  height: 10,
                 ),
-                Container(
-                  // width:100,
-                  padding: const EdgeInsets.all(2.0),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.yellow),
-                  child: TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/homepage'),
-                      child: const Text(
-                        "الغاء الطلب ",
-                      )),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Container(
-                    padding: const EdgeInsets.all(2.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.yellow,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      width: 10,
                     ),
-                    child: TextButton(
-                      onPressed: () async {
-                        // Assuming you have a GlobalKey<FormState> for your form and a TextEditingController for your description
-                        if (_formKey.currentState?.validate() ?? false) {
-                          // Check for null
-                          String userId =
-                              'the_user_id'; // Replace with the actual user ID
-                          String? phoneNumber = await DatabaseProvider()
-                              .getUserPhoneNumber(userId);
+                    Container(
+                      // width:100,
+                      padding: const EdgeInsets.all(2.0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: Colors.yellow),
+                      child: TextButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, '/homepage'),
+                          child: const Text(
+                            "الغاء الطلب ",
+                          )),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                        padding: const EdgeInsets.all(2.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: Colors.yellow,
+                        ),
+                        child: TextButton(
+                          onPressed: () async {
+                            // Assuming you have a GlobalKey<FormState> for your form and a TextEditingController for your description
+                            if (_formKey.currentState?.validate() ?? false) {
+                              // Check for null
+                              String userId =
+                                  'the_user_id'; // Replace with the actual user ID
+                              String? phoneNumber = await DatabaseProvider()
+                                  .getUserPhoneNumber(userId);
 
-                          String serviceName =
-                              "تصليح دش وتليقزيون"; // The service name is static, as provided.
-                          String description = _descriptionController
-                              .text; // Description entered by the user in the TextFormField.
-                          try {
-                            // Create and save the order
+                              String serviceName =
+                                  'تصليح دش وتليفيزيون'; // The service name is static, as provided.
+                              String description = _descriptionController
+                                  .text; // Description entered by the user in the TextFormField.
+                              try {
+                                // Create and save the order
 
-                            Order newOrder = Order(
-                              name: serviceName,
-                              date: DateFormat('dd/MM/yyyy').format(DateTime
-                                  .now()), // Current date in dd/MM/yyyy format
-                              description: description,
-                              customerPhone: phoneNumber,
-                              status: 'incomplete',
-                              id: 1, // Set status as incomplete
-                            );
+                                Order newOrder = Order(
+                                  name: serviceName,
+                                  date: DateFormat('dd/MM/yyyy').format(DateTime
+                                      .now()), // Current date in dd/MM/yyyy format
+                                  description: description,
+                                  customerPhone: phoneNumber,
+                                  status: 'incomplete',
+                                  id: 1, // Set status as incomplete
+                                );
 
-                            // Insert the new order into the database and then navigate to the OrdersPage.
-                            await DatabaseProvider().insertOrder(newOrder);
-                            // Feedback to the user (e.g., navigate to orders page or show success message)
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => OrdersPage(
-                                          order: newOrder,
-                                        )));
-                          } catch (e) {
-                            // Handle errors and provide feedback
-                            if (kDebugMode) {
-                              print('Error creating order: $e');
+                                // Insert the new order into the database and then navigate to the OrdersPage.
+                                await DatabaseProvider().insertOrder(newOrder);
+                                // Feedback to the user (e.g., navigate to orders page or show success message)
+                                // ignore: use_build_context_synchronousl
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => OrdersPage(
+                                              order: newOrder,
+                                            )));
+                              } catch (e) {
+                                // Handle errors and provide feedback
+                                if (kDebugMode) {
+                                  print('Error creating order: $e');
+                                }
+                              }
                             }
-                          }
-                        }
-                      },
-                      child: const Text(
-                        "تأكيد طلب الخدمة",
-                      ),
-                    )),
+                          },
+                          child: const Text(
+                            "تأكيد طلب الخدمة",
+                          ),
+                        )),
+                    const SizedBox(
+                      width: 20,
+                    )
+                  ],
+                ),
                 const SizedBox(
-                  width: 20,
-                )
+                  height: 20,
+                ),
               ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-          ],
-        ),
+            )),
       ),
       bottomNavigationBar: SizedBox(
         height: 88,

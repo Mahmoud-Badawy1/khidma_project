@@ -111,9 +111,9 @@ class _DescriptionPagefilState extends State<DescriptionPagefil> {
         backgroundColor: const Color.fromARGB(243, 247, 143, 6),
       ),
       body: SingleChildScrollView(
-        child: Column(
+        child: Form(
           key: _formKey,
-          children: [
+          child: Column(children: [
             const SizedBox(
               height: 20,
             ),
@@ -141,13 +141,13 @@ class _DescriptionPagefilState extends State<DescriptionPagefil> {
                             height: 20,
                           ),
                           Container(
-                            width: 250,
+                            width: 100,
                             height: 50,
                             decoration: const BoxDecoration(),
                             child: const Center(
-                              child: Text("فنى فلاتر",
+                              child: Text('فلاتر',
                                   style: TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 24, fontWeight: FontWeight.bold,
                                       color:
                                           Color.fromARGB(255, 255, 255, 255))),
                             ),
@@ -377,7 +377,7 @@ class _DescriptionPagefilState extends State<DescriptionPagefil> {
                               .getUserPhoneNumber(userId);
 
                           String serviceName =
-                              "فنى فلاتر"; // The service name is static, as provided.
+                              'فلاتر'; // The service name is static, as provided.
                           String description = _descriptionController
                               .text; // Description entered by the user in the TextFormField.
                           try {
@@ -396,6 +396,7 @@ class _DescriptionPagefilState extends State<DescriptionPagefil> {
                             // Insert the new order into the database and then navigate to the OrdersPage.
                             await DatabaseProvider().insertOrder(newOrder);
                             // Feedback to the user (e.g., navigate to orders page or show success message)
+                            // ignore: use_build_context_synchronousl
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -422,7 +423,7 @@ class _DescriptionPagefilState extends State<DescriptionPagefil> {
             const SizedBox(
               height: 20,
             ),
-          ],
+          ],)
         ),
       ),
       bottomNavigationBar: SizedBox(

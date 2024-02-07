@@ -141,13 +141,13 @@ class _DescriptionPageState extends State<DescriptionPage> {
                             height: 20,
                           ),
                           Container(
-                            width: 250,
+                            width: 100,
                             height: 50,
                             decoration: const BoxDecoration(),
                             child: const Center(
                               child: Text("كهربائى",
                                   style: TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 24, fontWeight: FontWeight.bold,
                                       color:
                                           Color.fromARGB(255, 255, 255, 255))),
                             ),
@@ -388,7 +388,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
                               date: DateFormat('dd/MM/yyyy').format(DateTime
                                   .now()), // Current date in dd/MM/yyyy format
                               description: description,
-                              customerPhone: phoneNumber = "20",
+                              customerPhone: phoneNumber,
                               status: 'incomplete',
                               id: 1, // Set status as incomplete
                             );

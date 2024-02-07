@@ -102,7 +102,7 @@ class _DescriptionPageacState extends State<DescriptionPageac> {
     }
   }
 
-  @override
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orangeAccent,
@@ -111,9 +111,9 @@ class _DescriptionPageacState extends State<DescriptionPageac> {
         backgroundColor: const Color.fromARGB(243, 247, 143, 6),
       ),
       body: SingleChildScrollView(
-        child: Column(
+        child: Form(
           key: _formKey,
-          children: [
+          child: Column(children: [
             const SizedBox(
               height: 20,
             ),
@@ -141,13 +141,13 @@ class _DescriptionPageacState extends State<DescriptionPageac> {
                             height: 20,
                           ),
                           Container(
-                            width: 250,
+                            width: 150,
                             height: 50,
                             decoration: const BoxDecoration(),
                             child: const Center(
-                              child: Text("صيانة مكيفات",
+                              child: Text("تكيف وتبريد",
                                   style: TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 24, fontWeight: FontWeight.bold,
                                       color:
                                           Color.fromARGB(255, 255, 255, 255))),
                             ),
@@ -377,7 +377,7 @@ class _DescriptionPageacState extends State<DescriptionPageac> {
                               .getUserPhoneNumber(userId);
 
                           String serviceName =
-                              "صيانة مكيفات"; // The service name is static, as provided.
+                              'تكيف وتبريد'; // The service name is static, as provided.
                           String description = _descriptionController
                               .text; // Description entered by the user in the TextFormField.
                           try {
@@ -396,6 +396,7 @@ class _DescriptionPageacState extends State<DescriptionPageac> {
                             // Insert the new order into the database and then navigate to the OrdersPage.
                             await DatabaseProvider().insertOrder(newOrder);
                             // Feedback to the user (e.g., navigate to orders page or show success message)
+                            // ignore: use_build_context_synchronousl
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -422,7 +423,7 @@ class _DescriptionPageacState extends State<DescriptionPageac> {
             const SizedBox(
               height: 20,
             ),
-          ],
+          ],)
         ),
       ),
       bottomNavigationBar: SizedBox(
