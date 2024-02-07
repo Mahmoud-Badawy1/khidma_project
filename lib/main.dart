@@ -38,6 +38,9 @@ class MyApp extends StatelessWidget {
               const LoginPage(), // Ensure LoginPage is defined in your screens
           '/signup': (context) =>
               const SignUpPage(), // Ensure SignUpPage is defined in your screens
+              '/workersignup': (context) =>
+              const WorkerSignUpPage(),
+              '/workerhome':(context) =>  const WorkerHomePage(),
           // '/forgotPassword': (context) => const ForgotPasswordScreen(),
           '/discribtionelc': (context) => const DescriptionPage(),
           '/discribtionac': (context) => const DescriptionPageac(),

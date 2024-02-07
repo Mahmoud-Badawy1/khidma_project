@@ -51,7 +51,7 @@ class _FirstPageState extends State<FirstPage> {
                       setState(() {
                         selectedUserType = 'worker';
                       });
-                      // Navigator.pushNamed(context, '/signup');
+                      Navigator.pushNamed(context, '/workerhome');
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size(200, 50), // Set width and height
