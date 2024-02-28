@@ -1,7 +1,7 @@
 # khidma-app
 
 A new Flutter project.
-## collaborate with @MoustafaAbdelrahimGaallouss
+## collaborate with @MoustafaAbdelrahimGaallouss: https://github.com/MoustafaAbdelrahimGaallouss
 
 ## Getting Started
 
