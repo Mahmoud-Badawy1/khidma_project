@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'workers_screens.dart';
 import 'package:provider/provider.dart';
+
+import 'workers_screens.dart';
 
 // ignore: must_be_immutable
 class WorkerSignUpPage extends StatefulWidget {
@@ -18,6 +19,8 @@ class _WorkerSignUpPageState extends State<WorkerSignUpPage> {
   final _phoneNumberController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _IDController = TextEditingController();
+
   String userType = FirstPage.selectedUserType; // Default user type
 
   void _handleSignUp(BuildContext context) async {
@@ -26,10 +29,12 @@ class _WorkerSignUpPageState extends State<WorkerSignUpPage> {
       final String phoneNumber = _phoneNumberController.text;
       final String email = _emailController.text;
       final String password = _passwordController.text;
+      final int ID = _IDController.text as int;
+
 
       final bool success =
           await Provider.of<UserProvider>(context, listen: false)
-              .signUp(userName, phoneNumber, email, password, userType);
+              .signUp(userName, phoneNumber, email, password, userType, ID);
 
       if (success) {
         // ignore: use_build_context_synchronously
@@ -54,7 +59,7 @@ class _WorkerSignUpPageState extends State<WorkerSignUpPage> {
           child: Column(
             children: <Widget>[
               Container(
-                color: const Color(0xFFFFC107), // Yellow Color for the top part
+                color:  Colors.orange, // Yellow Color for the top part
                 padding:
                     EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                 height: 150,
@@ -107,8 +112,6 @@ class _WorkerSignUpPageState extends State<WorkerSignUpPage> {
                   ),
                 ),
               ),
-// Repeat the same pattern for other TextFormField widgets
-
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
@@ -134,6 +137,37 @@ class _WorkerSignUpPageState extends State<WorkerSignUpPage> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'رجاءً ادخل رقم الهاتف الخاص بك';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+              ),
+                Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                        30.0), // Adjust the radius as needed
+                    border: Border.all(
+                      color: Colors.grey, // Border color
+                      width: 1.0, // Border width
+                    ),
+                  ),
+                  child: TextFormField(
+                    controller: _IDController,
+                    decoration: InputDecoration(
+                      labelText: 'الرقم القومى',
+                      labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'رجاءً ادخل الرقم القومى';
                       }
                       return null;
                     },
@@ -205,6 +239,23 @@ class _WorkerSignUpPageState extends State<WorkerSignUpPage> {
                   ),
                 ),
               ),
+              // DropdownButton<String>(
+              //   value: selectedStudent,
+              //   onChanged: (String? newValue) {
+              //     setState(() {
+              //       selectedStudent = newValue!;
+              //     });
+              //   },
+              //   items: <String>['a','b','c']
+              //   //'تكيف وتبريد', 'كهربائي', 'تصليح كاميرات'  'تصليح مصاعد','فلاتر','محارة','نجار','نقاش','سباك','حداد','تصليح دش وتليفيزيون'
+              //       .map<DropdownMenuItem<String>>((String value) {
+              //     return DropdownMenuItem<String>(
+              //       value: value,
+              //       child: Text(value),
+              //     );
+              //   }).toList(),
+              // ),
+
               const SizedBox(height: 12),
               Padding(
                 padding:
@@ -214,7 +265,7 @@ class _WorkerSignUpPageState extends State<WorkerSignUpPage> {
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor:
-                        const Color.fromARGB(255, 248, 183, 32), // Text Color
+                        Colors.orange, // Text Color
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
@@ -228,7 +279,7 @@ class _WorkerSignUpPageState extends State<WorkerSignUpPage> {
                 ),
               ),
               TextButton(
-                onPressed: () => Navigator.pushNamed(context, '/login'),
+                onPressed: () => Navigator.pushNamed(context, '/workerlogin'),
                 child: const Text('لدى حساب بالفعل'),
               ),
             ],

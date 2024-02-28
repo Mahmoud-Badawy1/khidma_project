@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,7 @@ class UserProvider with ChangeNotifier {
   UserProvider(this._databaseProvider);
 
   Future<bool> signUp(String userName, String phoneNumber, String email,
-      String password, String userType) async {
+      String password, String userType, ID) async {
     try {
       // Hash the password
       var bytes = utf8.encode(password); // data being hashed

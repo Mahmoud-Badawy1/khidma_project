@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'screens.dart';
 import 'package:provider/provider.dart';
+
+import 'screens.dart';
 
 // ignore: must_be_immutable
 class SignUpPage extends StatefulWidget {
@@ -26,10 +27,11 @@ class _SignUpPageState extends State<SignUpPage> {
       final String phoneNumber = _phoneNumberController.text;
       final String email = _emailController.text;
       final String password = _passwordController.text;
-
+      
       final bool success =
           await Provider.of<UserProvider>(context, listen: false)
-              .signUp(userName, phoneNumber, email, password, userType);
+              .signUp(userName, phoneNumber, email, password, userType,"");
+              
 
       if (success) {
         // ignore: use_build_context_synchronously
@@ -54,7 +56,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             children: <Widget>[
               Container(
-                color: const Color(0xFFFFC107), // Yellow Color for the top part
+                color: Colors.orange, // Yellow Color for the top part
                 padding:
                     EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                 height: 150,
@@ -107,8 +109,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
               ),
-// Repeat the same pattern for other TextFormField widgets
-
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
@@ -193,6 +193,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
+                         
                       ),
                     ),
                     obscureText: true,
@@ -214,7 +215,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor:
-                        const Color.fromARGB(255, 248, 183, 32), // Text Color
+                        Colors.orange, // Text Color
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),

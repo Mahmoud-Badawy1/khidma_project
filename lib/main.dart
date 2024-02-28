@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'screens.dart';
+import 'package:khidma_app/workers_screens/worker_login.dart';
 import 'package:provider/provider.dart';
+
+import 'screens.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,6 +42,12 @@ class MyApp extends StatelessWidget {
               const SignUpPage(), // Ensure SignUpPage is defined in your screens
               '/workersignup': (context) =>
               const WorkerSignUpPage(),
+              '/workerlogin': (context) =>
+              const WorkerLoginPage(),
+              '/present': (context) =>
+              const Present(),
+              '/chat': (context) =>
+              const Chat(),
               '/workerhome':(context) =>  const WorkerHomePage(),
           // '/forgotPassword': (context) => const ForgotPasswordScreen(),
           '/discribtionelc': (context) => const DescriptionPage(),
