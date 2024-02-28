@@ -2,6 +2,7 @@
 
 A new Flutter project.
 ## collaborate with @MoustafaAbdelrahimGaallouss: https://github.com/MoustafaAbdelrahimGaallouss
+## Only Me'Mahmoud Badawy' and my friend Mostafa Abdelrahim worked on this project.
 
 ## Getting Started
 
