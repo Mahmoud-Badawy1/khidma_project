@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'screens.dart';
+import '../screens.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

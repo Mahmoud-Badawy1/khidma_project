@@ -3,13 +3,13 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'screens.dart';
+import '../screens.dart';
 
 import 'package:crypto/crypto.dart';
 
 class UserProvider with ChangeNotifier {
   final DatabaseProvider _databaseProvider;
-  
+
   BuildContext? context;
 
   UserProvider(this._databaseProvider);
@@ -33,13 +33,12 @@ class UserProvider with ChangeNotifier {
       // Insert the user data into the database
       await _databaseProvider.insertUser(userData);
       return true;
-   } catch (e) {
-  if (kDebugMode) {
-    print("Signup error: $e");
-  }
-  return false;
-}
-
+    } catch (e) {
+      if (kDebugMode) {
+        print("Signup error: $e");
+      }
+      return false;
+    }
   }
 
   Future<Map<String, dynamic>?> login(String email, String password) async {
@@ -102,10 +101,5 @@ class UserProvider with ChangeNotifier {
 
   // Method to handle order creation or updates
 
-
   // Add any additional methods that your application requires
 }
-
-
-
- 

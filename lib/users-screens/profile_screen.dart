@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'screens.dart';
+import '../screens.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -10,7 +10,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-   late Future<String?> userNameFuture;
+  late Future<String?> userNameFuture;
 
   @override
   void initState() {
@@ -23,6 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
     // Ensure the widget rebuilds after loading the user data
     setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,35 +33,35 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: Column(
         children: [
-            const SizedBox(height: 20),
-             const CircleAvatar(
-              backgroundColor: Colors.white,
+          const SizedBox(height: 20),
+          const CircleAvatar(
+            backgroundColor: Colors.white,
             radius: 60,
-            backgroundImage: AssetImage(
-                'assets/images/logo.png'),
+            backgroundImage: AssetImage('assets/images/logo.png'),
           ),
           const SizedBox(height: 20),
-            FutureBuilder<String?>(
-              future: userNameFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  // Display a loading indicator while waiting for the result
-                  return const CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  // Handle error case
-                  return Text('Error: ${snapshot.error}');
-                } else if (snapshot.hasData) {
-                  // Display the username if available
-                  return Text(
-                    snapshot.data!,
-                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  );
-                } else {
-                  // Display a fallback if no data is available
-                  return const Text('Username not found');
-                }
-              },
-            ),
+          FutureBuilder<String?>(
+            future: userNameFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                // Display a loading indicator while waiting for the result
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                // Handle error case
+                return Text('Error: ${snapshot.error}');
+              } else if (snapshot.hasData) {
+                // Display the username if available
+                return Text(
+                  snapshot.data!,
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
+                );
+              } else {
+                // Display a fallback if no data is available
+                return const Text('Username not found');
+              }
+            },
+          ),
           const SizedBox(height: 20),
           buildProfileOption('طلباتي السابقة', Icons.history),
           buildProfileOption('الملف الشخصي', Icons.person),
@@ -80,7 +81,6 @@ class _ProfilePageState extends State<ProfilePage> {
               child: const Text('Log Out'),
             ),
           ),
-          
         ],
       ),
       bottomNavigationBar: SizedBox(
@@ -172,38 +172,41 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   ListTile buildProfileOption(String title, IconData icon) {
-  return ListTile(
-    leading: Icon(icon, color: Colors.grey),
-    title: Text(title),
-    trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
-    onTap: () {
-      switch (title) {
-        case 'طلباتي السابقة':
-          // Handle navigation for this item
-          Navigator.pushNamed(context, '/orders');
-          break;
-        case 'الملف الشخصي':
-          // Handle navigation for this item
-          Navigator.pushNamed(context, '/profile');
-          break;
-        case 'تغيير كلمة المرور':
-          // Handle navigation for this item
-          Navigator.pushNamed(context, '/change_password');
-          break;
-        case 'تغيير نوع الحساب':
-          // Handle navigation for this item
-          Navigator.pushNamed(context, '/change_account_type');
-          break;
-        // Add more cases for each item in your list
-        default:
-          break;
-      }
-    },
-  );
-}
- Future<String?> getUserName(String userId) async {
+    return ListTile(
+      leading: Icon(icon, color: Colors.grey),
+      title: Text(title),
+      trailing:
+          const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+      onTap: () {
+        switch (title) {
+          case 'طلباتي السابقة':
+            // Handle navigation for this item
+            Navigator.pushNamed(context, '/orders');
+            break;
+          case 'الملف الشخصي':
+            // Handle navigation for this item
+            Navigator.pushNamed(context, '/profile');
+            break;
+          case 'تغيير كلمة المرور':
+            // Handle navigation for this item
+            Navigator.pushNamed(context, '/change_password');
+            break;
+          case 'تغيير نوع الحساب':
+            // Handle navigation for this item
+            Navigator.pushNamed(context, '/change_account_type');
+            break;
+          // Add more cases for each item in your list
+          default:
+            break;
+        }
+      },
+    );
+  }
+
+  Future<String?> getUserName(String userId) async {
     final dbProvider = DatabaseProvider(); // Create an instance
-    final dbClient = await dbProvider.database; // Access database through the instance
+    final dbClient =
+        await dbProvider.database; // Access database through the instance
 
     List<Map> result = await dbClient.query(
       DatabaseProvider.TABLE_USERS,
@@ -217,8 +220,6 @@ class _ProfilePageState extends State<ProfilePage> {
     }
     return null;
   }
-  
-
 }
 
 // body: SingleChildScrollView(

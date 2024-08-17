@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'screens.dart';
+import '../screens.dart';
 
 // ignore: must_be_immutable
 class SignUpPage extends StatefulWidget {
@@ -27,11 +27,10 @@ class _SignUpPageState extends State<SignUpPage> {
       final String phoneNumber = _phoneNumberController.text;
       final String email = _emailController.text;
       final String password = _passwordController.text;
-      
+
       final bool success =
           await Provider.of<UserProvider>(context, listen: false)
-              .signUp(userName, phoneNumber, email, password, userType,"");
-              
+              .signUp(userName, phoneNumber, email, password, userType, "");
 
       if (success) {
         // ignore: use_build_context_synchronously
@@ -193,7 +192,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
-                         
                       ),
                     ),
                     obscureText: true,
@@ -214,8 +212,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   onPressed: () => _handleSignUp(context),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor:
-                        Colors.orange, // Text Color
+                    backgroundColor: Colors.orange, // Text Color
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
